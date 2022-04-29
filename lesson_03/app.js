@@ -2,6 +2,7 @@ const app = Vue.createApp({
     data() {
         return {
             valueCalc: 0,
+            displayValue: ""
         }
     },
     methods: {
@@ -13,11 +14,11 @@ const app = Vue.createApp({
         },
         displayOutput() {
             if (this.valueCalc < 37) {
-                return "Not there yet.";
+                this.displayValue = "Not there yet.";
             } else if (this.valueCalc > 37) {
-                return "Too much!";
+                this.displayValue = "Too much!";
             } else {
-                return valueCalc;
+                this.displayValue = valueCalc;
             }
     
         }
