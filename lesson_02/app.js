@@ -9,7 +9,6 @@ const app = Vue.createApp({
     methods: {
         alertMessage() {
             alert(this.message);
-
         },
         showOutput(e) {
             this.output = e.target.value
