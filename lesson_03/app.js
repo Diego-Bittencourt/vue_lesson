@@ -2,7 +2,6 @@ const app = Vue.createApp({
     data() {
         return {
             valueCalc: 0, 
-            output_test: ""
         }
     },
     computed: {
@@ -17,21 +16,19 @@ const app = Vue.createApp({
         }
     },
     methods: {
-        increaseFive() {
-            this.valueCalc = this.valueCalc + 5;
-        },
-        increaseOne() {
-            this.valueCalc++;
-        },
-               
+        incrementValue(num) {
+            this.valueCalc = this.valueCalc + num;
+        }          
     },
     watch: {
         displayOutput() {
             console.log("working");
             const that = this;
-            setTimeout(() => {that.valueCalc = 0}, 5000);
-          
-        }
+           setTimeout(() => {
+                that.valueCalc = 0;                
+            }, 5000);
+            
+          }
     }
 });
 
