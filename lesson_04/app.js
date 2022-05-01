@@ -3,15 +3,16 @@ const app = Vue.createApp({
         return {
             hideParagraph: false,
             showParagraph: true,
-            
+            userClass: "",
         }
     },
     computed: {
         paragraphClasses() {
             return {
                 hidden: this.hideParagraph,
-                visible: this.showParagraph
-            };
+                visible: this.showParagraph,
+                
+            }
         }
     },
     methods: {
