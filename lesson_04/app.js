@@ -4,6 +4,7 @@ const app = Vue.createApp({
             hideParagraph: false,
             showParagraph: true,
             userClass: "",
+            bckgroundColor: ""
         }
     },
     computed: {
