@@ -23,7 +23,7 @@
       <input type="text" v-model="userInput" @keyup.enter="addToDo()">
       <button @click="addToDo()">Add Task</button>
       <ul v-if="listVisible">
-        <li v-for="(item, index) in toDos" key="item">
+        <li v-for="(item, index) in toDos" key="item" @click="removeItem(index)">
           {{ index + 1 }} - {{ item }} 
           <!-- I added the {{ index + 1}} syntax to create a list item using the index and it WORKED! AWESOME! -->
         </li>
