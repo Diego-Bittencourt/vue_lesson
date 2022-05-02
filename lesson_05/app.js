@@ -33,4 +33,4 @@ app.mount("#assignment");
 // 05 - Created a method to toggle visibility. The method is activated by the click in the button and 
         // change the listVisibile data property.
 // 06 - I created a new <p> element using v-else as a placeholder to keep the list organized.
-// 07 - I implemented the click to remove the item from the list. It works.
+// 07 - I implemented the click to remove the item from the list. It works.gi stat
