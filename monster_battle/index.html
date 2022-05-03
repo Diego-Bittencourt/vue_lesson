@@ -33,7 +33,7 @@
         {{ playRound }}
         <button @click="attackMonster">ATTACK</button>
         <button :disabled="specialAvailable" @click="specialAttack">SPECIAL ATTACK</button>
-        <button>HEAL</button>
+        <button :disabled="healAvailable" @click="healPlayer">HEAL</button>
         <button>SURRENDER</button>
       </section>
       <section id="log" class="container">
