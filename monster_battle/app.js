@@ -8,14 +8,21 @@ const app = Vue.createApp({
             monsterHealth: 100,
             playerHealth: 100,
             playRound: 0,
-            winner: null
+            winner: null,
+            battleLog: []
         }
     },
     computed: {
         monsterHealthBar() {
+            if (this.monsterHealth <= 0) {
+                return {width: "0%"}
+            }
             return { width: this.monsterHealth + "%" };
         },
         playerHealthBar() {
+            if (this.playerHealth <= 0) {
+                return {width: "0%"}
+            }
             return { width: this.playerHealth + "%" }
         },
         specialAvailable() {
@@ -47,16 +54,19 @@ const app = Vue.createApp({
             this.monsterHealth -= attackValue;
             this.attackPlayer();
             this.playRound++;
+            this.battleLog.unshift("You deal " + attackValue + " damage to the Monster!")
             },
         attackPlayer() {
             let attackValue = getRandomValue(8, 15);
             this.playerHealth -= attackValue;
+            this.battleLog.unshift("The Monster inflicted " + attackValue + " damage.")
             },
         specialAttack() {
             let attackValue = getRandomValue(10, 25);
             this.monsterHealth -= attackValue;
             this.attackPlayer();
             this.playRound++;
+            this.battleLog.unshift("Your special attack hits and the Monster loses " + attackValue + " hitpoints!")
         },
         healPlayer() {
             this.playRound++;
@@ -67,6 +77,17 @@ const app = Vue.createApp({
                 this.playerHealth += healValue;
             }
             this.attackPlayer();
+            this.battleLog.unshift("You healed " + healValue + " hitpoints.")
+        },
+        resetGame() {
+            this.playerHealth = 100;
+            this.monsterHealth = 100;
+            this.playRound = 0;
+            this.winner = null;
+            this.battleLog = [];
+        },
+        surrender() {
+            this.winner = "monster";
         }
     }
 
@@ -92,3 +113,12 @@ app.mount("#game");
 // 07 - Time to implement a game over window. Create two watcher to watch the player health and the monster health. 
 // 08 - Create a data property to hold the winner. The winner property is set to null initially because I'll use a
 //      v-if to triger the game over screen, therefore using null is a falsy value which doesn't trigger the v-if.
+// 09 - Implement the zero health bar. Just adding an if statement to the computed properties. The health number can be zero, 
+//      but the health bar can't.
+// 10 - The game over screen should remove the game buttons. So it can be achieved with an v-else statemente since these
+//      two sections are direct neighbours.
+// 11 - Adding a button to reset the game that triggers a methods that resets the value of health, round counter and winner.
+// 12 - Added the surrender functionality by triggering a methods that sets the winner to monster.
+// 13 - I implemented the battle log by creating an empty array and a unshift method to every methods. Each methods triggered
+//      unshifts a hardcoded sentence to the battle log array and the array is rendered on the html by v-for.
+
