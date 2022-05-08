@@ -2,8 +2,9 @@
     <section>
         <h2>My Friends</h2>
         <ul>
-            <friend-contact></friend-contact>
-            <friend-contact></friend-contact>
+            <li><friend-contact></friend-contact></li>
+            <li><friend-contact></friend-contact></li>
+        </ul>
     </section>
 </template>
 
@@ -19,8 +20,8 @@ export default {
                     email: 'manuel@localhost.com'
                 },
                 {
-                    id: 'julia',
-                    name: 'Julia Jones',
+                    id: 'julie',
+                    name: 'Julie Jones',
                     phone: '987 12345 90',
                     email: 'julie@localhost.com' 
                 }

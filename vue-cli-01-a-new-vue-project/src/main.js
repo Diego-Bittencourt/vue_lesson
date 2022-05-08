@@ -1,16 +1,22 @@
 import { createApp } from 'vue'; 
 
-// refering to a package, so just the package name.
+// // refering to a package, so just the package name.
 
 import App from './App.vue'; 
 
-//refering to a file, so the path to the file. The name after import is up to you. It's conventional
-// to name the same as the file.
+// //refering to a file, so the path to the file. The name after import is up to you. It's conventional
+// // to name the same as the file.
 
-import FriendContact from "./componentes/FriendContact.vue"
+import FriendContact from './components/FriendContact.vue';
 
-const app = Vue.createApp(App);
+const app = createApp(App)
+
+app.component('friend-contact', FriendContact)
+
+app.mount("#app");
+
+// const app = Vue.createApp(App);
  
-app.component("FriendContact", FriendContact)
+// app.component("FriendContact", FriendContact)
 
-app.mount('#app');
+// app.mount('#app');
