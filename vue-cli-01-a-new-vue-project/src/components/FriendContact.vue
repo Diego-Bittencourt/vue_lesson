@@ -40,6 +40,19 @@ export default {
         }
 
     },
+    // emits: ['toggle-favorite'];
+    // the emits property isn't mandatory, but it documents all the emits your component has.
+    // It's good for own documentation as well as other team members.
+    emits: {
+        'toggle-favorite': function(id) {
+            if(id) {
+                return true;
+            } else {
+                console.log("Id is missing.");
+                return false
+            }
+        }
+    },
     data() {
         return {
             toggleDetails: false            
