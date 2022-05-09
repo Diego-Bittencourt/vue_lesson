@@ -8,7 +8,8 @@
             :name="friend.name"
             :phone-number="friend.phone"
             :email-address="friend.email"
-            :is-favorite="true"></friend-contact></li>
+            :is-favorite="friend.favorite"
+            ></friend-contact></li>
             </ul>
     </section>
 </template>
@@ -22,14 +23,16 @@ export default {
                     id: 'manuel',
                     name: 'Manuel Lorenz',
                     phone: '0123 45678 90',
-                    email: 'manuel@localhost.com'
+                    email: 'manuel@localhost.com',
+                    favorite: true
                 },
                 {
                     id: 'joana',
                     name: 'Joana Jones',
                     phone: '987 12345 90',
-                    email: 'joana@localhost.com' 
-                }
+                    email: 'joana@localhost.com',
+                    favorite: false
+                }                
             ]
         }
     }
