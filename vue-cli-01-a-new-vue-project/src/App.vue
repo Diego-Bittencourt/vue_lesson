@@ -1,4 +1,7 @@
 <template>
+  <section>
+    <header><add-contact @create-contact="insertContact"></add-contact></header>
+  </section>
     <section>
         <header><h1>My Friends</h1></header>
         <ul>
@@ -42,6 +45,9 @@ export default {
       toggleFavoriteStatus(friendId) {
         const identifiedFriend = this.friends.find(friend => friend.id === friendId);
         identifiedFriend.favorite = !identifiedFriend.favorite;
+      },
+      insertContact(contact) {
+        this.friends.unshift(contact);
       }
     }
 
