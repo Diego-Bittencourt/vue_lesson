@@ -18,13 +18,8 @@ export default {
     ],
     data() {
         return {
-            toggleDetails: false,
-            friend: {
-                id: "manuel",
-                name: "Manuel Lorenz",
-                email: "manuel@localhost.com",
-                phone: '0123 45678 90',
-            }
+            toggleDetails: false
+            
         }
     },
     methods: {
