@@ -26,7 +26,8 @@ export default {
     },
     methods: {
         userLogin() {
-            this.$emit("LogUser", this.loggedUser, this.loggedAge);
+            let userId = this.loggedUser + this.loggedAge + Math.floor(Math.random() * 1000);
+            this.$emit("LogUser", userId, this.loggedUser, this.loggedAge);
         }
     }
 }

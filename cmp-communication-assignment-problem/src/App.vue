@@ -1,11 +1,13 @@
 <template>
-    <active-user> 
+    <active-user 
+    v-for="user in loghistory"
+    :key="user.id"
+    :id="user.id"
+    :name="user.name"
+    :age="user.age"> {{ user }}
     </active-user>  
     <user-data @logUser="userLogged"> 
     </user-data>
-    <p>{{loghistory}}</p>
-
-<h1> {{ test }} </h1>
 </template>
 
 <script>
