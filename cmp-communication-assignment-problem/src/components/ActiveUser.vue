@@ -1,5 +1,5 @@
 <template>
-    <div class="wrap">
+     <div class="wrap">
         <h1 v-if="index">Past User</h1>
         <h1 v-else>Current User</h1>
         <h2> Name: {{ name }}

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <form @submit.prevent="userLogin" class="wrapper">
+         <form @submit.prevent="userLogin" class="wrapper">
         <label> Name:
             <input type="text" v-model="this.loggedUser" required>
         </label>

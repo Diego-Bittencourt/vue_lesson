@@ -32,7 +32,7 @@ export default {
                 name: user,
                 age: age
             };
-            this.loghistory.unshift(newUser);
+             this.loghistory.unshift(newUser);
         }
     }
 };
