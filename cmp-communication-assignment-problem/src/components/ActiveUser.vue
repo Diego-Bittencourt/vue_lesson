@@ -1,9 +1,12 @@
 <template>
     <div class="wrap">
+        <h1 v-if="index">Past User</h1>
+        <h1 v-else>Current User</h1>
         <h2> Name: {{ name }}
         </h2>
         <h3> Age: {{ age }}
         </h3>
+        <hr>
     </div>
 </template>
 
@@ -21,6 +24,11 @@ export default {
         age: {
             type: Number,
             required: true
+        },
+        index: {
+            type: String,
+            required: false,
+            default: "0"
         }
     }
     
