@@ -44,7 +44,7 @@ export default {
     width: 80vw;
     min-height: 200px; 
     justify-content: space-evenly;
-    border: 1px solid red;
+    align-items: flex-start;
     gap: 10px;
     margin: 0 auto;
 }

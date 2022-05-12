@@ -39,6 +39,9 @@ export default {
     justify-content: center;
     align-items: center;
     margin: auto;
+    max-height: 200px;
+    
+
     
 }
 label, input {
