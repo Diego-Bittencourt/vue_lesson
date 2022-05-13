@@ -21,3 +21,8 @@ app.mount('#app');
 //Plus, the KnowledgeElement send an emit event that is being passed through knowledgegrid and knowledgebase and
 //is being used in the App.vue file. This passthrough system isn't uncommon in Vue but there are better ways
 //to do this, by useng provide and inject.
+
+//I created the provide element that sends data to any child that has the inject element.
+
+//The provide/inject duo can also be used to pass an listened emit from a child to a parent. To achieve that,
+//I should create a provide element in the parent, pointing to the method in the parent and injecting it in the child.
