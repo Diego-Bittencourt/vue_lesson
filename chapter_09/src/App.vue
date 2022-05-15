@@ -7,7 +7,9 @@
       :info-text="activeUser.description"
       :role="activeUser.role"
     />
+    <keep-alive>
     <component :is="selectedComponent" />
+    </keep-alive>
     <button @click="toggleComponent('active-goals')">Active Goals</button>
     <button @click="toggleComponent('manage-goals')">Manage Goals</button>
   </div>
