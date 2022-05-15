@@ -7,6 +7,9 @@
       :info-text="activeUser.description"
       :role="activeUser.role"
     />
+    <component :is="selectedComponent" />
+    <button @click="toggleComponent('active-goals')">Active Goals</button>
+    <button @click="toggleComponent('manage-goals')">Manage Goals</button>
   </div>
 </template>
 
@@ -14,11 +17,15 @@
 import TheHeader from "./components/TheHeader.vue";
 import BadgeList from './components/BadgeList.vue';
 import UserInfo from './components/UserInfo.vue';
+import ActiveGoals from './components/ActiveGoals.vue';
+import ManageGoals from './components/ManageGoals.vue';
 export default {
   components: {
   TheHeader,
   BadgeList,
-  UserInfo
+  UserInfo,
+  ActiveGoals,
+  ManageGoals
 },
   data() {
     return {
@@ -27,8 +34,14 @@ export default {
         description: 'Site owner and admin',
         role: 'admin',
       },
+      selectedComponent: ''
     };
   },
+  methods: {
+    toggleComponent(cmp) {
+      this.selectedComponent = cmp;
+    }
+  }
 };
 </script>
 

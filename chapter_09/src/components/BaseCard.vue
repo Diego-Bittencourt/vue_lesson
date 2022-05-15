@@ -15,6 +15,7 @@ export default {
 
 
 <style scoped>
+
 div {
   margin: 2rem auto;
   max-width: 30rem;
