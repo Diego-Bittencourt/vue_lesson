@@ -83,6 +83,11 @@
         <label for="how-other">Other</label>
       </div>
       <div class="form-control">
+        <rating-control v-model="rating"></rating-control>
+        <!-- creating an v-model on a custom component creates the following pattern -->
+        <!-- rating-control :model-value="" @update:modelValue="" -->
+      </div>
+      <div class="form-control">
         <input type="checkbox" id="confirm-terms" name="confirm-terms" />
         <label for="confirm-terms">Agree to terms of use?</label>
       </div>
@@ -94,7 +99,12 @@
 </template>
 
 <script>
+import RatingControl from './RatingControl.vue';
 export default {
+  props: [],
+  components: {
+    RatingControl
+  },
   data() {
     return {
       userName: '',
@@ -102,6 +112,7 @@ export default {
       referrer: 'wom',
       interest: [],
       how: null,
+      rating: null,
       userNameValidity: "pending"
     };
   },
@@ -115,6 +126,9 @@ export default {
       this.interest = [];
       console.log(this.how);
       this.how = null;
+      console.log(this.rating);
+      this.rating = null;
+      console.log(this.rating);
     },
     validateInput() {
       if (this.userName === "") {
@@ -136,6 +150,7 @@ form {
   box-shadow: 0 2px 8px rgba(0, 0, 0, 0.26);
   padding: 2rem;
   background-color: #ffffff;
+  
 }
 
 .form-control {
