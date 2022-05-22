@@ -46,8 +46,13 @@ export default {
         this.results = results;
       });
       
+    },
+    
+  },
+  mounted() {
+      this.loadExperiences();
+      //The mounted method triggers when the component is mounted. Go to the Vue component lifecycle for a refresher.
     }
-  }
 };
       //Now I'm sending a GET request. Since the GET request is the defaul, there is no need to write it.
       //Every GET request returns a promise that can be used with the .then() method which takes a function inside.
