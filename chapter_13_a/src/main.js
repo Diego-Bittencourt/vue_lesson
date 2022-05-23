@@ -35,3 +35,5 @@ app.mount('#app');
 // 7 - After that, the Vue needs to know where to render the component. For that, we use a vue-router built-in
 // element called: <router-view></router-view> and use the app.use() function with the library inside braces.
 // NOTE: The path should start with /, not with ./
+// 8 - Now, to navigate inside the app, I should use the vue-router built-in element: <router-link></router-link>
+// which is rendered as a link in the browser.
