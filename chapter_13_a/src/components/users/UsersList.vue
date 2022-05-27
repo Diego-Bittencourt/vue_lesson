@@ -15,9 +15,9 @@ export default {
   inject: ['users'],
   methods: {
     confirmInput() {
-      //do something
+      // do something
       // to navigate away without links.
-      //Since Im using the router, I have this property
+      // Since Im using the router, I have this property
       this.$router.push('/teams');
     }
   }

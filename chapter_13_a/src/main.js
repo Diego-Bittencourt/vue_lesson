@@ -3,24 +3,34 @@ import { createRouter, createWebHistory } from 'vue-router';
 import TeamsList from './components/teams/TeamsList.vue';
 import UsersList from './components/users/UsersList.vue';
 import App from './App.vue';
+import TeamMembers from './components/teams/TeamMembers.vue';
 
 const router = createRouter({
-    history: createWebHistory(),
-    routes: [
-        {
-            path: '/teams', component: TeamsList
-        },
-        {
-            path: '/users', component: UsersList
-        },
-    ],
-    linkActiveClass: 'active'
+  history: createWebHistory(),
+  routes: [
+    {
+      path: '/teams',
+      component: TeamsList,
+    },
+    {
+      path: '/users',
+      component: UsersList,
+    },
+    { 
+        path: '/teams/:teamId', // dynamic route/path. Binding with : you can change with anything you want after.
+        component: TeamMembers, // It is important to keep in mind that the order in ther router matter. If I put
+                                // another route after /teams with a fixed value, it won't be triggered but it will 
+                                // be captured by the dynamic one first.
+                                // For example, if I put a '/teams/new' route after the dynamic one, the '/teams/:teamId'
+                                // rout will catch if first and try to render it, making the '/teams/new' path hidden, not functional.
+    },
+  ],
+  linkActiveClass: 'active',
 });
 
-const app = createApp(App)
+const app = createApp(App);
 app.use(router);
 app.mount('#app');
-
 
 //The router functionality allows to load certain components in different url's. It might useful to share direct links.
 
