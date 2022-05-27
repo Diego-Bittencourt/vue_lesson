@@ -4,10 +4,14 @@ import TeamsList from './components/teams/TeamsList.vue';
 import UsersList from './components/users/UsersList.vue';
 import App from './App.vue';
 import TeamMembers from './components/teams/TeamMembers.vue';
+import NotFound from './components/nav/NotFound.vue';
 
 const router = createRouter({
   history: createWebHistory(),
   routes: [
+    {
+      path: '/', redirect: '/teams' // redirect is different from alias. 
+    },
     {
       path: '/teams',
       component: TeamsList,
@@ -19,12 +23,16 @@ const router = createRouter({
     { 
         path: '/teams/:teamId', // dynamic route/path. Binding with : you can change with anything you want after.
         component: TeamMembers, // It is important to keep in mind that the order in ther router matter. If I put
-                     // another route after /teams with a fixed value, it won't be triggered but it will 
+                                // another route after /teams with a fixed value, it won't be triggered but it will 
                                 // be captured by the dynamic one first.
                                 // For example, if I put a '/teams/new' route after the dynamic one, the '/teams/:teamId'
                                 // rout will catch if first and try to render it, making the '/teams/new' path hidden, not functional.
         props: true             // Setting this to true, the router pass the teamId as a prop, not only through $router.
-                              },
+    },
+    {
+      path: '/:notFound(.*)',   // this is useful because it has a regex that catches any invalid link that the user 
+      component: NotFound,
+    }
   ],
   linkActiveClass: 'active',
 });
