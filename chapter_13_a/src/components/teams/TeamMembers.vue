@@ -27,9 +27,9 @@ export default {
     };
   },
   created() {
-    //this is the hook that gets activated when the page is created.
+    // this is the hook that gets activated when the page is created.
     // The $route is available in this component because this component is created through the router.
-    //this.$route.path // /teams/t1
+    // this.$route.path // /teams/t1
     const teamId = this.$route.params.teamId; 
     const selectedTeam = this.teams.find(team => team.id === teamId)
     const members = selectedTeam.members;
@@ -40,7 +40,7 @@ export default {
     }
     this.members = selectedMembers;
     this.teamName = selectedTeam.name;
-      //this params takes all the parameters that were used to get to this page.
+    //this params takes all the parameters that were used to get to this page.
     // I can use console.log(this.$route) to see all data available in this $route
   }
 };
