@@ -3,7 +3,7 @@
     <nav>
       <ul>
         <li>
-          <router-link to="teams">Teams</router-link>
+          <router-link to="/teams">Teams</router-link>
         </li>
         <li>
           <router-link to="/users">Users</router-link>
@@ -50,14 +50,16 @@ a {
   display: inline-block;
 }
 
-
-/* a.router-link-active */
-
 a:hover,
 a:active,
-a .active{
+/* a.router-link-active */
+a.active { 
   color: #f1a80a;
   border-color: #f1a80a;
   background-color: #1a037e;
 }
+/* When a link is active, the router will automatically add a standart class that can be used to style.
+Also, it can be chosen in the main.js file using the linkActiveClass property in the routes element.
+I'm going to do that. */
 </style>
+
