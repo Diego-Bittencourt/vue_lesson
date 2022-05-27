@@ -9,6 +9,7 @@
         :role="member.role"
       ></user-item>
     </ul>
+    <router-link to="/teams/t2">Go to Team 2</router-link>
   </section>
 </template>
 
@@ -17,6 +18,7 @@ import UserItem from '../users/UserItem.vue';
 
 export default {
   inject: ['users', 'teams'],
+  props:['teamId'],
   components: {
     UserItem
   },
@@ -26,11 +28,9 @@ export default {
       members: []
     };
   },
-  created() {
-    // this is the hook that gets activated when the page is created.
-    // The $route is available in this component because this component is created through the router.
-    // this.$route.path // /teams/t1
-    const teamId = this.$route.params.teamId; 
+  methods: {
+    loadTeamMembers(teamId) {
+    //const teamId = route.params.teamId; 
     const selectedTeam = this.teams.find(team => team.id === teamId)
     const members = selectedTeam.members;
     const selectedMembers = [];
@@ -40,8 +40,25 @@ export default {
     }
     this.members = selectedMembers;
     this.teamName = selectedTeam.name;
+    
+    }
+  },
+  created() {
+    this.loadTeamMembers(this.teamId)
+    // this.loadTeamMembers(this.$route); this way is not optimal.
+    // this is the hook that gets activated when the page is created.
+    // The $route is available in this component because this component is created through the router.
+    // this.$route.path // /teams/t1
     //this params takes all the parameters that were used to get to this page.
     // I can use console.log(this.$route) to see all data available in this $route
+    // For better design, I'll move the function that was here to a method.
+    
+  },
+  watch: {
+    teamId(newId) {
+    // $route(newRoute) {
+      this.loadTeamMembers(newId);
+    }
   }
 };
 </script>
