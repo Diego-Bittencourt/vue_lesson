@@ -5,6 +5,8 @@ import UsersList from './components/users/UsersList.vue';
 import App from './App.vue';
 import TeamMembers from './components/teams/TeamMembers.vue';
 import NotFound from './components/nav/NotFound.vue';
+import TeamsFooter from './components/teams/TeamsFooter.vue';
+import UsersFooter from './components/users/UsersFooter.vue';
 
 const router = createRouter({
   history: createWebHistory(),
@@ -15,7 +17,14 @@ const router = createRouter({
     {
       name: 'teams',
       path: '/teams',
-      component: TeamsList,
+      components: {
+        default: TeamsList,
+        footer: TeamsFooter
+        //If you need more than one router rendered in the same level or component, you can add
+        //the componentS property that asks for an object with pairs. Each pair has a router-view name and
+        // the component. Of course, the router-view element shall receive an name, just like slots.
+        // There can be one unnamed router-view.
+      },
       children: [
         { name: 'team-members', path: ':teamId', component: TeamMembers, props: true}
         // the TeamMembers component is now routed as a children of teams, so there the <route-view> element
@@ -24,7 +33,10 @@ const router = createRouter({
     },
     {
       path: '/users',
-      component: UsersList,
+      components: {
+        default: UsersList,
+        footer: UsersFooter
+      }
     },
     // { 
     //     path: '/teams/:teamId', // dynamic route/path. Binding with : you can change with anything you want after.

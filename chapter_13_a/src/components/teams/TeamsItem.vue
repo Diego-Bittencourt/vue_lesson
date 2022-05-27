@@ -11,22 +11,28 @@
 
 <script>
 export default {
-  props: ['id','name', 'memberCount'],
+  props: ['id', 'name', 'memberCount'],
   computed: {
     teamMembersLink() {
       // return '/teams/' + this.id;
-      // each router can have a name that can be invoked in the code. 
-      // in the case below, the router is using dynamic url, so it needs the params object with a 
+      // each router can have a name that can be invoked in the code.
+      // in the case below, the router is using dynamic url, so it needs the params object with a
       // pair that the router needs to receive, in this case, the binded parameters to the props.
       // Also, I can change the path in the main.js without changeing all the routers in the code.
       return {
-        name: 'team-members', 
+        name: 'team-members',
         params: {
-          teamId: this.id
-        }};
-      },
-    }
-  };
+          teamId: this.id,
+        },
+        query: {
+          // the query parameters are passed through url and are optional.
+          // query parameters are accessed by $router, so they're not available as props.
+          sort: 'asc', 
+        },
+      };
+    },
+  },
+};
 </script>
 
 <style scoped>

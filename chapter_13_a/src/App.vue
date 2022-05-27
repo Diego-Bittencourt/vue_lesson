@@ -3,15 +3,17 @@
   <main>
     <router-view></router-view>
   </main>
+  <footer>
+    <router-view name="footer"></router-view>
+  </footer>
 </template>
 
 <script>
-
 import TheNavigation from './components/nav/TheNavigation.vue';
 
 export default {
   components: {
-    TheNavigation
+    TheNavigation,
   },
   data() {
     return {
@@ -35,9 +37,7 @@ export default {
       users: this.users,
     };
   },
-  methods: {
-    
-  },
+  methods: {},
 };
 </script>
 
