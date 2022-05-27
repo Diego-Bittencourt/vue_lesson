@@ -15,20 +15,25 @@ const router = createRouter({
     {
       path: '/teams',
       component: TeamsList,
+      children: [
+        { path: ':teamId', component: TeamMembers, props: true}
+        // the TeamMembers component is now routed as a children of teams, so there the <route-view> element
+        // must be place in the parent component.
+      ]
     },
     {
       path: '/users',
       component: UsersList,
     },
-    { 
-        path: '/teams/:teamId', // dynamic route/path. Binding with : you can change with anything you want after.
-        component: TeamMembers, // It is important to keep in mind that the order in ther router matter. If I put
-                                // another route after /teams with a fixed value, it won't be triggered but it will 
-                                // be captured by the dynamic one first.
-                                // For example, if I put a '/teams/new' route after the dynamic one, the '/teams/:teamId'
-                                // rout will catch if first and try to render it, making the '/teams/new' path hidden, not functional.
-        props: true             // Setting this to true, the router pass the teamId as a prop, not only through $router.
-    },
+    // { 
+    //     path: '/teams/:teamId', // dynamic route/path. Binding with : you can change with anything you want after.
+    //     component: TeamMembers, // It is important to keep in mind that the order in ther router matter. If I put
+    //     props: true             // another route after /teams with a fixed value, it won't be triggered but it will 
+    //                             // be captured by the dynamic one first.
+    //                             // For example, if I put a '/teams/new' route after the dynamic one, the '/teams/:teamId'
+    //                             // rout will catch if first and try to render it, making the '/teams/new' path hidden, not functional.
+    //                             // Setting this to true, the router pass the teamId as a prop, not only through $router.
+    // },
     {
       path: '/:notFound(.*)',   // this is useful because it has a regex that catches any invalid link that the user 
       component: NotFound,
