@@ -17,6 +17,8 @@ const router = createRouter({
     {
       name: 'teams',
       path: '/teams',
+      meta: { needsAuth: true }, // I can add meta data that can be evaluated by a navigation guard
+                                 // it can be accessed by to.meta.needsAuth argument.
       components: {
         default: TeamsList,
         footer: TeamsFooter
