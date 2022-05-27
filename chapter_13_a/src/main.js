@@ -8,6 +8,9 @@ import NotFound from './components/nav/NotFound.vue';
 import TeamsFooter from './components/teams/TeamsFooter.vue';
 import UsersFooter from './components/users/UsersFooter.vue';
 
+// All that router related code can be transfered to a router.js file to make things neater.
+// The router.js can be imported in the main.js
+
 const router = createRouter({
   history: createWebHistory(),
   routes: [
