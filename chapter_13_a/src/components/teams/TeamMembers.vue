@@ -54,6 +54,12 @@ export default {
     // For better design, I'll move the function that was here to a method.
     
   },
+  // beforeRouteUpdate(to, from, next) {
+  //   // The beforeRouteUpdate can be used by a component which is reused t=with different data to evaluate, deny or accept
+  //   // the new data.
+       // it can be used to call a method to grab new data and reloads the component. In this app,there is already 
+       // code to handle that, so it is not necessary. But it is an alternative.
+  // },
   watch: {
     teamId(newId) {
     // $route(newRoute) {

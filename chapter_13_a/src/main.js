@@ -36,7 +36,11 @@ const router = createRouter({
       components: {
         default: UsersList,
         footer: UsersFooter
-      }
+      },
+      // beforeEnter(to, from, each) {
+      //   // works the same as beforeEach, but in this case it checks only before entering /users
+      // it can be placed inside the component, as long as the vue-router is being used.
+      // }
     },
     // { 
     //     path: '/teams/:teamId', // dynamic route/path. Binding with : you can change with anything you want after.
@@ -68,6 +72,22 @@ const router = createRouter({
 
   }
 });
+
+// router.afterEach(function(to, from) {});
+//  The afterEach hook works like beforeEach, but it only takes two parameters.
+//  It is often used to send data.
+//  It is triggered after the navigation event completed.
+//  It is not used to control the navigation.
+
+
+// router.beforeEach(function (to, from, next) {
+//   // next() can cancel (false) the navigation or confirm it (*empty* or true)
+//   // Besides empty, true of fase, an string or an object.
+//   // it can be used in an if statment.
+// });
+// Navigation Guards
+// before each navigation event, this function will be triggered. And it needs three arguments.
+
 
 const app = createApp(App);
 app.use(router);
