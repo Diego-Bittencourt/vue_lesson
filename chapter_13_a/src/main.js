@@ -13,10 +13,11 @@ const router = createRouter({
       path: '/', redirect: '/teams' // redirect is different from alias. 
     },
     {
+      name: 'teams',
       path: '/teams',
       component: TeamsList,
       children: [
-        { path: ':teamId', component: TeamMembers, props: true}
+        { name: 'team-members', path: ':teamId', component: TeamMembers, props: true}
         // the TeamMembers component is now routed as a children of teams, so there the <route-view> element
         // must be place in the parent component.
       ]

@@ -14,10 +14,19 @@ export default {
   props: ['id','name', 'memberCount'],
   computed: {
     teamMembersLink() {
-      return '/teams/' + this.id;
+      // return '/teams/' + this.id;
+      // each router can have a name that can be invoked in the code. 
+      // in the case below, the router is using dynamic url, so it needs the params object with a 
+      // pair that the router needs to receive, in this case, the binded parameters to the props.
+      // Also, I can change the path in the main.js without changeing all the routers in the code.
+      return {
+        name: 'team-members', 
+        params: {
+          teamId: this.id
+        }};
+      },
     }
-  }
-};
+  };
 </script>
 
 <style scoped>
