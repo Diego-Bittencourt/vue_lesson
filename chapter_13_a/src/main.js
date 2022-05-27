@@ -53,6 +53,20 @@ const router = createRouter({
     }
   ],
   linkActiveClass: 'active',
+  scrollBehavior(to, from, savedPosition) {
+    //the scrollBehavior is a method that is triggered everytime the page changes.
+    // it always get three arguments shown above. The names can be chosen but let's keep descriptive.
+    // The savePosition is object with left and top property showing where the user scrolled to before going back.
+    console.log(to, from, savedPosition);
+    if (savedPosition) {
+      return savedPosition;
+    }
+    return {
+      left: 0,
+      top: 0
+    };
+
+  }
 });
 
 const app = createApp(App);
