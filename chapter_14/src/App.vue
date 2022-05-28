@@ -16,14 +16,13 @@
     </transition>
     <button @click="toggleParagraph">Toggle paragraph</button>
   </div>
-  <transition name="modal">
+  
     <!-- When using transition in custom elements, the classes fall throuth the root of the child element
     Since, in this case, there are two root elements, so it doesn't work. -->
-    <base-modal @close="hideDialog" v-if="dialogIsVisible">
+    <base-modal @close="hideDialog" :open="dialogIsVisible">
       <p>This is a test dialog!</p>
       <button @click="hideDialog">Close it!</button>
     </base-modal>
-  </transition>
   <div class="container">
     <button @click="showDialog">Show Dialog</button>
   </div>
@@ -119,69 +118,25 @@ the classes are being removed, so there is no use for the forward keyword.*/
   animation: slide-scale 0.3s ease-out;
 }
 
-.para-enter-to {
+/* .para-enter-to {
   /* opacity: 1;
   transform: translateY(0); */
-}
+/* } */ 
 
-.para-leave-from {
+/* .para-leave-from {
   /* opacity: 1;
   transform: translateY(0); */
-}
+/* }  */
 
 .para-leave-active {
   animation: slide-scale 0.3s ease-out;
 }
 
-.para-leave-to {
+/* .para-leave-to {
   /* opacity: 0;
   transform: translateY(30px); */
-}
+/* }  */
 
-.modal-enter-from {
-}
-
-.modal-enter-active {
-  animation: modal 0.3s ease-out;
-}
-
-.modal-enter-to {
-}
-
-.modal-leave-from {
-
-}
-
-.modal-leave-active {
-animation: modal 0.3s ease-in;
-}
-
-.modal-leave-to {
-
-}
-
-@keyframes modal-leave {
-  from {
-    opacity: 1;
-    tranform: translateY(0) scale(1);
-  }
-
-  to {
-
-  }
-}
-
-@keyframes modal {
-  from {
-    opacity: 0;
-    transform: translateY(-50px) scale(0.9);
-  }
-
-  to {
-    opacity: 1;
-    transform: translateY(0) scale(1);
-  }
-}
 
 @keyframes slide-scale {
   0% {
