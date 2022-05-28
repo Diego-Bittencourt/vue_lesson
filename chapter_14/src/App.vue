@@ -16,13 +16,24 @@
     </transition>
     <button @click="toggleParagraph">Toggle paragraph</button>
   </div>
-  
-    <!-- When using transition in custom elements, the classes fall throuth the root of the child element
+  <div class="container">
+    <transition name="fade-button" mode="out-in">
+      <!-- the mode allows to control what happens first -->
+    <button @click="showUsers" v-if="usersAreVisible === false">Show users</button>
+    <button @click="hideUsers" v-else>Hide users</button>
+    </transition>
+    <!-- There is an exception about using more than one direct child element inside a transition element
+    If only one element is in the DOM at certain time, then you can put them inside the transition tag
+    If, in a certain moment, both elements are in the DOM, the transition won't work. -->
+    <!-- USING V-ELSE IS RECOMMENDED -->
+  </div>
+
+  <!-- When using transition in custom elements, the classes fall throuth the root of the child element
     Since, in this case, there are two root elements, so it doesn't work. -->
-    <base-modal @close="hideDialog" :open="dialogIsVisible">
-      <p>This is a test dialog!</p>
-      <button @click="hideDialog">Close it!</button>
-    </base-modal>
+  <base-modal @close="hideDialog" :open="dialogIsVisible">
+    <p>This is a test dialog!</p>
+    <button @click="hideDialog">Close it!</button>
+  </base-modal>
   <div class="container">
     <button @click="showDialog">Show Dialog</button>
   </div>
@@ -35,9 +46,16 @@ export default {
       animatedBLock: false,
       dialogIsVisible: false,
       paraIsVisible: false,
+      usersAreVisible: false
     };
   },
   methods: {
+    showUsers() {
+      this.usersAreVisible = true;
+    },
+    hideUsers() {
+      this.usersAreVisible = false;
+    },
     toggleParagraph() {
       this.paraIsVisible = !this.paraIsVisible;
     },
@@ -121,7 +139,7 @@ the classes are being removed, so there is no use for the forward keyword.*/
 /* .para-enter-to {
   /* opacity: 1;
   transform: translateY(0); */
-/* } */ 
+/* } */
 
 /* .para-leave-from {
   /* opacity: 1;
@@ -137,6 +155,24 @@ the classes are being removed, so there is no use for the forward keyword.*/
   transform: translateY(30px); */
 /* }  */
 
+.fade-button-enter-from,
+.fade-button-leave-from {
+  opacity: 0;
+
+}
+
+.fade-button-enter-active {
+  transition: opacity 0.3s ease-out;
+}
+
+.fade-button-leave-active {
+  transition: opacity 0.3s ease-in;
+}
+
+.fade-button-enter-to,
+.fade-button-leave-from {
+  opacity: 1;
+}
 
 @keyframes slide-scale {
   0% {
