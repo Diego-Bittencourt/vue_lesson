@@ -11,7 +11,18 @@
     <!-- You can also change the class name entirely by stating it in the transition elemenet.
       You can write v-enter-from="first-state"
       This is particularly interesting when working with css libraries and stuff. -->
-    <transition name="para">
+    <transition 
+    name="para" 
+    @before-enter="beforeEnter" 
+    @before-leave="beforeLeave"
+    @enter="enter"
+    @after-enter="afterEnter"
+    @leave="leave"
+    @after-leave="afterLeave"
+    >
+      <!-- You can listen to the animation events. Each event has a name and they pass the html element
+      the <transition> tag is holding. 
+      The after-enter hook triggers when the animation is completed.-->
       <p v-if="paraIsVisible">This is only sometimes visible...</p>
     </transition>
     <button @click="toggleParagraph">Toggle paragraph</button>
@@ -50,6 +61,25 @@ export default {
     };
   },
   methods: {
+    afterLeave() {
+      console.log("afterLeave");
+    },
+    leave() {
+      console.log('leave');
+    },
+    afterEnter() {
+      console.log("After animation");
+    },
+    enter() {
+      console.log("enter");
+    },
+    beforeLeave(el) {
+      console.log("Before Leave");
+      console.log(el);
+    },
+    beforeEnter() {
+      console.log("Before Enter");
+    },
     showUsers() {
       this.usersAreVisible = true;
     },
