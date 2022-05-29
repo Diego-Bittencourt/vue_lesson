@@ -19,6 +19,8 @@
     @after-enter="afterEnter"
     @leave="leave"
     @after-leave="afterLeave"
+    @enter-cancelled="enterCancelled"
+    @leave-cancelled="leaveCancelled"
     >
       <!-- You can listen to the animation events. Each event has a name and they pass the html element
       the <transition> tag is holding. 
@@ -57,28 +59,57 @@ export default {
       animatedBLock: false,
       dialogIsVisible: false,
       paraIsVisible: false,
-      usersAreVisible: false
+      usersAreVisible: false,
+      enterInterval: null,
+      leaveInterval: null
     };
   },
   methods: {
+    enterCancelled() {clearInterval(this.enterInterval)},
+    leaveCancelled() {clearInterval(this.leaveInterval)},
     afterLeave() {
       console.log("afterLeave");
     },
-    leave() {
+    leave(el, done) {
       console.log('leave');
+      let round = 1;
+      this.leaveInterval = setInterval(() => {
+        el.style.opacity = 1 - round * 0.01;
+        round++;
+        if (round > 100) {
+          clearInterval(this.leaveInterval); // Inside an arrow function, the this. keyword as expected.
+          done();
+        }
+      }, 20);
     },
     afterEnter() {
       console.log("After animation");
     },
-    enter() {
+    // Keep in mind that, in JS, the code execution goes on and only launches the setInterval function
+    // So, the hook "after enter" is triggered before this animation complete because of the setInterval function.
+    // This can be solved by using a second argument as a function to let Vue know we are done.
+    // I tested and, aparently, the second argument can be named freely, but the same word should be
+    // called as a function later.
+    enter(el, done) {
       console.log("enter");
+      let round = 1;
+      this.enterInterval = setInterval(() => {
+        el.style.opacity = round * 0.01;
+        round++;
+        if (round > 100) {
+          clearInterval(this.enterInterval);
+          done();
+        }
+      }, 20);
     },
     beforeLeave(el) {
       console.log("Before Leave");
       console.log(el);
+      el.style.opacity = 1;
     },
-    beforeEnter() {
+    beforeEnter(el) {
       console.log("Before Enter");
+      el.style.opacity = 0;
     },
     showUsers() {
       this.usersAreVisible = true;
@@ -156,10 +187,10 @@ in the styling.
 They are named accordingly to enter or leave 
 the classes are being removed, so there is no use for the forward keyword.*/
 
-.para-enter-from {
+/* .para-enter-from {
   animation: slide-scale 0.3s ease-out;
   /* opacity: 0;
-  transform: translateY(-30px); */
+  transform: translateY(-30px); 
 }
 
 .para-enter-active {
@@ -174,16 +205,17 @@ the classes are being removed, so there is no use for the forward keyword.*/
 /* .para-leave-from {
   /* opacity: 1;
   transform: translateY(0); */
-/* }  */
+/* }  
 
 .para-leave-active {
   animation: slide-scale 0.3s ease-out;
-}
+} 
 
 /* .para-leave-to {
   /* opacity: 0;
   transform: translateY(30px); */
 /* }  */
+/* I commented out all the para... css class because I'm going to animate the paragraph with only JS. */
 
 .fade-button-enter-from,
 .fade-button-leave-from {
