@@ -79,6 +79,7 @@ li:hover {
 
 .user-list-leave-active {
     transition: all 1s ease-in;
+    position: absolute;
 }
 
 .user-list-leave-to {
@@ -86,4 +87,12 @@ li:hover {
     transform: translateX(30px);
 }
 
+.user-list-move {
+    /* This is the property that controls other objects inside the transition-group element
+    that are not the focus of the animation (enter or leave) */
+    /* Those elements will be moved by the transform CSS property */
+    transition: transform 0.8s ease;
+    /* This works when the focused element enters, but not when it leaves. Therefore, it is necessary to
+    use position: absolute; to the leaving element. */
+}
 </style>
