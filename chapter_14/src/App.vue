@@ -1,5 +1,8 @@
 <template>
   <div class="container">
+    <user-list></user-list>
+  </div>
+  <div class="container">
     <div class="block" :class="{ animate: animatedBLock }"></div>
     <button @click="animateBlock">Animate</button>
   </div>
@@ -11,16 +14,18 @@
     <!-- You can also change the class name entirely by stating it in the transition elemenet.
       You can write v-enter-from="first-state"
       This is particularly interesting when working with css libraries and stuff. -->
-    <transition 
-    name="para" 
-    @before-enter="beforeEnter" 
-    @before-leave="beforeLeave"
-    @enter="enter"
-    @after-enter="afterEnter"
-    @leave="leave"
-    @after-leave="afterLeave"
-    @enter-cancelled="enterCancelled"
-    @leave-cancelled="leaveCancelled"
+    <!-- Adding the :css="false" disables the css animations for that transition. It is not necessary
+      but it let vue knows you won't use css so it skips the anaylsis. It increases performance. -->
+    <transition
+      :css="false"
+      @before-enter="beforeEnter"
+      @before-leave="beforeLeave"
+      @enter="enter"
+      @after-enter="afterEnter"
+      @leave="leave"
+      @after-leave="afterLeave"
+      @enter-cancelled="enterCancelled"
+      @leave-cancelled="leaveCancelled"
     >
       <!-- You can listen to the animation events. Each event has a name and they pass the html element
       the <transition> tag is holding. 
@@ -32,8 +37,10 @@
   <div class="container">
     <transition name="fade-button" mode="out-in">
       <!-- the mode allows to control what happens first -->
-    <button @click="showUsers" v-if="usersAreVisible === false">Show users</button>
-    <button @click="hideUsers" v-else>Hide users</button>
+      <button @click="showUsers" v-if="usersAreVisible === false">
+        Show users
+      </button>
+      <button @click="hideUsers" v-else>Hide users</button>
     </transition>
     <!-- There is an exception about using more than one direct child element inside a transition element
     If only one element is in the DOM at certain time, then you can put them inside the transition tag
@@ -53,7 +60,12 @@
 </template>
 
 <script>
+import UserList from './components/UserList.vue'
+
 export default {
+  components: {
+    UserList,
+  },
   data() {
     return {
       animatedBLock: false,
@@ -61,14 +73,18 @@ export default {
       paraIsVisible: false,
       usersAreVisible: false,
       enterInterval: null,
-      leaveInterval: null
+      leaveInterval: null,
     };
   },
   methods: {
-    enterCancelled() {clearInterval(this.enterInterval)},
-    leaveCancelled() {clearInterval(this.leaveInterval)},
+    enterCancelled() {
+      clearInterval(this.enterInterval);
+    },
+    leaveCancelled() {
+      clearInterval(this.leaveInterval);
+    },
     afterLeave() {
-      console.log("afterLeave");
+      console.log('afterLeave');
     },
     leave(el, done) {
       console.log('leave');
@@ -83,7 +99,7 @@ export default {
       }, 20);
     },
     afterEnter() {
-      console.log("After animation");
+      console.log('After animation');
     },
     // Keep in mind that, in JS, the code execution goes on and only launches the setInterval function
     // So, the hook "after enter" is triggered before this animation complete because of the setInterval function.
@@ -91,7 +107,7 @@ export default {
     // I tested and, aparently, the second argument can be named freely, but the same word should be
     // called as a function later.
     enter(el, done) {
-      console.log("enter");
+      console.log('enter');
       let round = 1;
       this.enterInterval = setInterval(() => {
         el.style.opacity = round * 0.01;
@@ -103,12 +119,12 @@ export default {
       }, 20);
     },
     beforeLeave(el) {
-      console.log("Before Leave");
+      console.log('Before Leave');
       console.log(el);
       el.style.opacity = 1;
     },
     beforeEnter(el) {
-      console.log("Before Enter");
+      console.log('Before Enter');
       el.style.opacity = 0;
     },
     showUsers() {
@@ -220,7 +236,6 @@ the classes are being removed, so there is no use for the forward keyword.*/
 .fade-button-enter-from,
 .fade-button-leave-from {
   opacity: 0;
-
 }
 
 .fade-button-enter-active {
