@@ -2,7 +2,7 @@
   <base-container title="Vuex"
     ><h3>{{ counter }}</h3>
     <the-counter></the-counter>
-    <button @click="addOne">Add 1</button>
+    <button @click="addOne">Add 10</button>
     <change-counter></change-counter>
   </base-container>
 </template>
@@ -25,10 +25,22 @@ export default {
   },
   methods: {
     addOne() {
-      this.$store.state.counter+= 11;
+      // this.$store.commit('increase', {value: 10});
+      //You can pass extra data through the second argument to the mutations.
+      //The mutations can be accessed using the $store.commit() function.
+      //There is also an alternative syntax where you pass an object to the commit()
+      //When doing that, you must pass an object with a type property in which you pass the
+      //mutation name as a string.
+      //Passing an object, you can pass as many data as you want.
+      this.$store.commit({
+        type: 'increase',
+        value: 10
+      })
     },
   },
 };
+//VERY IMPORTANT: Never change the state from inside your components. This is a BAD PRACTICE.
+//Instead, change the state by using mutations.
 </script>
 
 <style>
