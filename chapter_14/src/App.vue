@@ -1,9 +1,17 @@
 <template>
-  
+  <router-view v-slot="slotProps">
+    <transition name="fade-button" mode="out-in">
+      <component :is="slotProps.Component"></component>
+    </transition>
+  </router-view>
 </template>
+<!-- To perform animation in router, you must place the transition tag inside the router-view
+      and put a dynamic component. Plus, you must sent the "slotProps" built-in element to the dynamic component.
+      The slotProps has a Compoennt property (with capital C) that passes the component inside router.
+       -->
 
 <script>
-import UserList from './components/UserList.vue'
+// import UserList from './components/UserList.vue'
 
 export default {
   components: {
@@ -133,6 +141,26 @@ button:active {
   padding: 2rem;
   border: 2px solid #ccc;
   border-radius: 12px;
+}
+
+.route-enter-from {
+}
+
+.route-enter-active {
+  animation: slide-scale 0.4s ease-out;
+}
+
+.route-enter-to {
+}
+
+.route-leave-from {
+}
+
+.route-leave-active {
+  animation: slide-scale 0.4s ease-in reverse;
+}
+
+.route-leave-to {
 }
 
 .animate {

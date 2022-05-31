@@ -20,4 +20,10 @@ app.component('base-modal', BaseModal);
 
 app.use(router);
 
-app.mount('#app');
+router.isReady().then(function () {
+    app.mount('#app');
+});
+
+// Using this syntax, the app won't make transition at the initial load.
+
+
