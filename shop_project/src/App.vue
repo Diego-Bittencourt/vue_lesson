@@ -36,7 +36,8 @@ export default {
       //When doing that, you must pass an object with a type property in which you pass the
       //mutation name as a string.
       //Passing an object, you can pass as many data as you want.
-      this.$store.commit({
+      this.$store.dispatch({
+        //dispatch triggers action, not mutations.
         type: 'increase',
         value: 10
       })

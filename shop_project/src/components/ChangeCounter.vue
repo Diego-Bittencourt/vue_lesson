@@ -6,7 +6,7 @@
 export default {
     methods: {
         addOne() {
-            this.$store.commit('increment');
+            this.$store.dispatch('increment');
             //to use a mutation inside the components, you should use the syntax above.
         }
     }
