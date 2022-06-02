@@ -1,94 +1,12 @@
 import { createApp } from 'vue';
-import { createStore } from 'vuex';
 import App from './App.vue';
-
+import store from './store/index.js';
 //Modules are separated stores that can hold logic for determined logics. It makes your code easier to read and understant
 // as your app grows. And once they're put in the modules property, they work as usual, in the same level.
-
-const counterModule = {
-  state() {
-    return {
-      counter: 0
-    };
-  },
-  mutations: {
-    increment(state) {
-      //Vuex garantees that the mutate receives the state as argument
-      state.counter = state.counter + 2;
-    },
-    increase(state, payload) {
-      state.counter = state.counter + payload.value;
-      console.log(state, payload);
-  },
-},
-  actions: {
-    increment(context) {
-      setTimeout(function () {
-        context.commit('increment');
-      }, 2000);
-    },
-    increase(context, payload) {
-        context.commit('increase', payload);
-    },
-  },
-  getters: {
-    finalCounter(state) {
-      // A getter is like a computed property and can take two argument, the second one can be another getter.
-      return state.counter * 3;
-    },
-    normalizedCounter(state, getters) {
-      const finalCounter = getters.finalCounter;
-      if (finalCounter < 0) {
-        return 0;
-      }
-      if (finalCounter > 100) {
-        return 100;
-      } else {
-        return finalCounter;
-      }
-    },
-  }
-}
-
+//Mutations, getters and actions are global, but the state is local to the module it belongs.
+//Therefore, a getter only have access to the state in the same module.
 
 const app = createApp(App);
-
-const store = createStore({
-  modules: {
-    counter: counterModule
-  },
-  state() {
-    return {
-      
-      isLoggedIn: false
-    };
-  },
-  mutations: {
-    //mutations must be synchronous. You can not put asynch code here. That leads to errors.
-    //to put asynch events, you should use actions which, in turn, commit mutations.
-    //It is considered good practice to put Actions between components and mutations.
-    
-      setAuth(state, payload) {
-      state.isLoggedIn = payload.isAuth;
-    }
-  },
-  actions: {
-    //You don't need to use the same name in actions or mutations, but it is good to do it.
-    
-    login(context) {
-      context.commit('setAuth', {isAuth: true});
-    },
-    logout(context) {
-      context.commit('setAuth', {isAuth: false});
-    }
-  },
-  getters: {
-    
-    userIsAuthenticated(state) {
-      return state.isLoggedIn;
-    }
-  },
-});
 
 app.use(store);
 

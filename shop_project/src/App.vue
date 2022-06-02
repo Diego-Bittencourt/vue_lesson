@@ -41,7 +41,7 @@ export default {
       //Passing an object, you can pass as many data as you want.
       this.$store.dispatch({
         //dispatch triggers action, not mutations.
-        type: 'increase',
+        type: 'counter/increase',
         value: 10
       })
     },

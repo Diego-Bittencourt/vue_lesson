@@ -14,7 +14,7 @@ export default {
         //...mapGetters({
         //     finalCounter: 'finalCounter'
         // })
-        ...mapGetters(['finalCounter'])
+        ...mapGetters('counter', ['finalCounter'])
     },
 
 }

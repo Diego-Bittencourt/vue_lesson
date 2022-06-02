@@ -14,7 +14,7 @@ export default {
         //The mapActions work similarly to mapGetters.
         // actions inside methods. getter inside computed.
         // ...mapActions(['increment', 'increase'])
-        ...mapActions({
+        ...mapActions('counter', {
             inc: 'increment',
             increase: 'increase'
 
