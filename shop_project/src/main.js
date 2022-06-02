@@ -8,6 +8,7 @@ const store = createStore({
   state() {
     return {
       counter: 0,
+      isLoggedIn: false
     };
   },
   mutations: {
@@ -22,6 +23,9 @@ const store = createStore({
       state.counter = state.counter + payload.value;
       console.log(state, payload);
     },
+    setAuth(state, payload) {
+      state.isLoggedIn = payload.isAuth;
+    }
   },
   actions: {
     //You don't need to use the same name in actions or mutations, but it is good to do it.
@@ -32,6 +36,12 @@ const store = createStore({
     },
     increase(context, payload) {
         context.commit('increase', payload);
+    },
+    login(context) {
+      context.commit('setAuth', {isAuth: true});
+    },
+    logout(context) {
+      context.commit('setAuth', {isAuth: false});
     }
   },
   getters: {
@@ -50,6 +60,9 @@ const store = createStore({
         return finalCounter;
       }
     },
+    userIsAuthenticated(state) {
+      return state.isLoggedIn;
+    }
   },
 });
 
