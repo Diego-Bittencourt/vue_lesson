@@ -2,19 +2,16 @@ import { createApp } from 'vue';
 import { createStore } from 'vuex';
 import App from './App.vue';
 
-const app = createApp(App);
+//Modules are separated stores that can hold logic for determined logics. It makes your code easier to read and understant
+// as your app grows. And once they're put in the modules property, they work as usual, in the same level.
 
-const store = createStore({
+const counterModule = {
   state() {
     return {
-      counter: 0,
-      isLoggedIn: false
+      counter: 0
     };
   },
   mutations: {
-    //mutations must be synchronous. You can not put asynch code here. That leads to errors.
-    //to put asynch events, you should use actions which, in turn, commit mutations.
-    //It is considered good practice to put Actions between components and mutations.
     increment(state) {
       //Vuex garantees that the mutate receives the state as argument
       state.counter = state.counter + 2;
@@ -22,13 +19,9 @@ const store = createStore({
     increase(state, payload) {
       state.counter = state.counter + payload.value;
       console.log(state, payload);
-    },
-    setAuth(state, payload) {
-      state.isLoggedIn = payload.isAuth;
-    }
   },
+},
   actions: {
-    //You don't need to use the same name in actions or mutations, but it is good to do it.
     increment(context) {
       setTimeout(function () {
         context.commit('increment');
@@ -37,12 +30,6 @@ const store = createStore({
     increase(context, payload) {
         context.commit('increase', payload);
     },
-    login(context) {
-      context.commit('setAuth', {isAuth: true});
-    },
-    logout(context) {
-      context.commit('setAuth', {isAuth: false});
-    }
   },
   getters: {
     finalCounter(state) {
@@ -60,6 +47,43 @@ const store = createStore({
         return finalCounter;
       }
     },
+  }
+}
+
+
+const app = createApp(App);
+
+const store = createStore({
+  modules: {
+    counter: counterModule
+  },
+  state() {
+    return {
+      
+      isLoggedIn: false
+    };
+  },
+  mutations: {
+    //mutations must be synchronous. You can not put asynch code here. That leads to errors.
+    //to put asynch events, you should use actions which, in turn, commit mutations.
+    //It is considered good practice to put Actions between components and mutations.
+    
+      setAuth(state, payload) {
+      state.isLoggedIn = payload.isAuth;
+    }
+  },
+  actions: {
+    //You don't need to use the same name in actions or mutations, but it is good to do it.
+    
+    login(context) {
+      context.commit('setAuth', {isAuth: true});
+    },
+    logout(context) {
+      context.commit('setAuth', {isAuth: false});
+    }
+  },
+  getters: {
+    
     userIsAuthenticated(state) {
       return state.isLoggedIn;
     }
